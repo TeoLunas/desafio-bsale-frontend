@@ -15,7 +15,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container d-flex">
         <main class="row border">
             <!-- Contenedor de barra de navegacion -->
             <header class="col-12 border">
@@ -53,7 +53,29 @@
                     <aside class="col-2 border">ASIDE</aside>
                     <section class="col-10 border">
                         <div class="row">
-                            <header class="col-12 border">Filtros</header>
+                            <header class="col-12 border">
+                                <div class="row">
+                                    <div class="col-6 border">
+                                        <form class="row g-3 d-flex align-items-center justify-content-center p-2">
+                                            <div class="col-auto">
+                                                <label for="searchProduct" class="visually-hidden">Password</label>
+                                                <input type="text" class="form-control" id="searchProduct" placeholder="Buscar">
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-primary">Buscar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-3 d-flex align-items-center justify-content-center p-2">
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option selected>Ordenar Por</option>
+                                            <option value="1">Nombre A - Z</option>
+                                            <option value="2">Precio Menor a Mayor</option>
+                                            <option value="3">Precio Mayor a Menor</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </header>
                             <section class="col-12">
                                 <div class="row">
                                     <article class="col-4 border">Product Card</article>
