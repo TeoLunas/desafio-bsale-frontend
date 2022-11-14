@@ -1,5 +1,5 @@
 // const urlApi = 'https://bsale-backend-api.herokuapp.com/api/v1/';
-const urlApi = 'https://bsale-app-api.herokuapp.com/api/v1';
+const urlApi = 'https://bsale-api-app-deplo.herokuapp.com/api/v1';
 const cardContainer = document.getElementById('card-container');
 const liContainerCategories = document.getElementById('li-container');
 const searchProductInput = document.getElementById('searchProduct');
