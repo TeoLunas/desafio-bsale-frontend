@@ -51,6 +51,18 @@ liContainerCategories.addEventListener('click', async(e)=> {
     }
 })
 
+paginationContainer.addEventListener('click', async(e)=> {
+    if(e.target.classList.contains('page-link')){
+        const page = e.target.dataset.id;
+        const products = await getProducts(page);
+        console.log(products)
+        cleanHtml(cardContainer);
+        showSpinner();
+        renderCards(products.rows);
+        hiddenSpinner();
+    }
+})
+
 /**
  * funcion que se carga cuando se abre la pagina principal.
  */
@@ -62,12 +74,11 @@ liContainerCategories.addEventListener('click', async(e)=> {
 /**
  * Funcion para obtener todos los productos
  */
-const getProducts = async() => {
-    const res = await fetch(`${urlApi}/products`);
+const getProducts = async(pageNumber = 1) => {
+    const res = await fetch(`${urlApi}/products/?page=${pageNumber}`);
     const data = await res.json();
     console.log(data)
     return data;
-
 };
 
 /**
