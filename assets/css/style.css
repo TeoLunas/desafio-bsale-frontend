@@ -20,7 +20,9 @@ p {
 
 
 @media (max-width: 480px) {
-
+    .custom-direction{
+        flex-direction: column;
+    }
 }
 
 @media(min-width: 1280px){
