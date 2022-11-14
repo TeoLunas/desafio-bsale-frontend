@@ -7,7 +7,7 @@ const spinner = document.getElementById('spinner');
 
 console.log(btnSearch)
 
-const imgRes = 'http://127.0.0.1:5500/assets/img/default.png'
+const imgRes = 'https://github.com/TeoLunas/desafio-bsale-frontend/blob/main/assets/img/default.png'
 
 const cardTemplate = document.querySelector('#template-card').content;
 const liTemplate = document.querySelector('#template-li').content;
