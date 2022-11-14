@@ -6,6 +6,7 @@ const searchProductInput = document.getElementById('searchProduct');
 const btnSearch = document.getElementById('btn-search');
 const spinner = document.getElementById('spinner');
 const paginationContainer = document.getElementById('pagination');
+const notFoundContainer = document.getElementById('notFoundContainer');
 
 const imgRes = 'https://raw.githubusercontent.com/TeoLunas/desafio-bsale-frontend/main/assets/img/default.png'
 
@@ -22,11 +23,12 @@ const startApp = async() => {
     renderCards(products.rows);
     hiddenSpinner();
     renderCategories();
+    renderPagination();
 }
 
-btnSearch.addEventListener('click', async(e)=> {
+btnSearch.addEventListener('click', async (e) => {
     e.preventDefault()
-     //Validacion para que solo se acepten letras y espacios.
+    //Validacion para que solo se acepten letras y espacios.
     const expr = /([^\w\d])+/g;
     let testInput = expr.test(searchProductInput.value);
     if (testInput || searchProductInput.value === '') {
@@ -35,18 +37,16 @@ btnSearch.addEventListener('click', async(e)=> {
             searchProductInput.classList.remove('border-danger');
         }, 3000);
         return;
-    } 
-    e.preventDefault();
-    cleanHtml(cardContainer)
-    try {
-        showSpinner();
+    } else {
+        cleanHtml(cardContainer)
         const products = await getSearchProducts(searchProductInput.value)
-        console.log(products)
+        showSpinner();
         renderCards(products);
         hiddenSpinner();
-
-    } catch (error) {
-        console.log(error.message)
+        hiddenErrorNotFound();
+        if (products.statusCode === 404) {
+            showErrorNotFound()
+        }
     }
 })
 
@@ -54,7 +54,6 @@ liContainerCategories.addEventListener('click', async(e)=> {
     if(e.target.classList.contains('nav-link')){
         const categoryId = e.target.dataset.id;
         const products = await getProductByCategory(categoryId);
-        console.log(products)
         cleanHtml(cardContainer);
         showSpinner();
         renderCards(products);
@@ -88,7 +87,6 @@ paginationContainer.addEventListener('click', async(e)=> {
 const getProducts = async(pageNumber = 1) => {
     const res = await fetch(`${urlApi}/products/?page=${pageNumber}`);
     const data = await res.json();
-    console.log(data)
     return data;
 };
 
@@ -185,9 +183,16 @@ const cleanHtml = (container) => {
     }
 }
 
-const errorNotFound = () => {
-    alert('not found')
+const showErrorNotFound = () => {
+    if(notFoundContainer.classList.contains('hidden-price')){
+        notFoundContainer.classList.remove('hidden-price');
+    }
 }
+
+const hiddenErrorNotFound = () => {
+    notFoundContainer.classList.add('hidden-price');
+}
+
 const showSpinner = () => {
     spinner.classList.remove('hidden-price')
 };
@@ -211,5 +216,3 @@ const renderPagination = async() => {
     })
     paginationContainer.appendChild(fragment)
 }
-
-renderPagination()
