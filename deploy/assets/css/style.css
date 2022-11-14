@@ -25,6 +25,9 @@ p {
 }
 
 @media(min-width: 1280px){
+    body {
+        background: red;
+    }
     .hidden-custom {
         display: block;
     }

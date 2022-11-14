@@ -1,35 +1,27 @@
-// const urlApi = 'https://bsale-backend-api.herokuapp.com/api/v1/';
-const urlApi = 'http://localhost:4000/api/v1/';
+// const urlDev = 'http://localhost:4000/api/v1/';
+const urlDev = 'https://bsale-backend-api.herokuapp.com/api/v1/';
 const cardContainer = document.getElementById('card-container');
-const liContainerCategories = document.getElementById('li-container');
+const liContainer = document.getElementById('li-container');
 const searchProductInput = document.getElementById('searchProduct');
 const btnSearch = document.getElementById('btn-search');
 const spinner = document.getElementById('spinner');
-const paginationContainer = document.getElementById('pagination');
 
-const imgRes = 'https://raw.githubusercontent.com/TeoLunas/desafio-bsale-frontend/main/assets/img/default.png'
+console.log(btnSearch)
+
+const imgRes = 'http://127.0.0.1:5500/assets/img/default.png'
 
 const cardTemplate = document.querySelector('#template-card').content;
 const liTemplate = document.querySelector('#template-li').content;
-const paginationTemplate = document.querySelector('#template-pagination').content;
 const fragment = document.createDocumentFragment();
 const fragmentLi = document.createDocumentFragment();
 
-document.addEventListener('DOMContentLoaded', () => {startApp()})
-
-const startApp = async() => {
-    const products = await getProducts();
-    renderCards(products.rows);
-    hiddenSpinner();
-    renderCategories();
-}
 
 btnSearch.addEventListener('click', async(e)=> {
     e.preventDefault();
     cleanHtml(cardContainer)
     try {
         showSpinner();
-        const products = await getSearchProducts(searchProductInput.value)
+        const products = await searchProducts(searchProductInput.value)
         console.log(products)
         renderCards(products);
         hiddenSpinner();
@@ -39,22 +31,18 @@ btnSearch.addEventListener('click', async(e)=> {
     }
 })
 
-liContainerCategories.addEventListener('click', async(e)=> {
-    if(e.target.classList.contains('nav-link')){
-        const categoryId = e.target.dataset.id;
-        const products = await getProductByCategory(categoryId);
-        console.log(products)
-        cleanHtml(cardContainer);
-        showSpinner();
-        renderCards(products);
-        hiddenSpinner();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    startApp()
 })
 
 /**
  * funcion que se carga cuando se abre la pagina principal.
  */
-
+const startApp = async() => {
+    const products = await getProducts();
+    renderCards(products.rows);
+    hiddenSpinner();
+}
 
 /**
  * Funciones de consulta a la API
@@ -63,9 +51,8 @@ liContainerCategories.addEventListener('click', async(e)=> {
  * Funcion para obtener todos los productos
  */
 const getProducts = async() => {
-    const res = await fetch(`${urlApi}/products`);
+    const res = await fetch(`${urlDev}/products`);
     const data = await res.json();
-    console.log(data)
     return data;
 
 };
@@ -74,9 +61,10 @@ const getProducts = async() => {
  * Funcion para obtener todas las categorias
  */
 const getCategories = async() => {
-    const res = await fetch(`${urlApi}/category`);
+    const res = await fetch(`${urlDev}/category`);
     const data = await res.json();
     if(res.status === 404){
+        console.log(data)
         return data;
     };
     return data;
@@ -85,9 +73,9 @@ const getCategories = async() => {
 /**
 * Funcion para buscar productos
 */
-const getSearchProducts = async (productName) => {
+const searchProducts = async (productName) => {
     try {
-        const res = await fetch(`${urlApi}/products/search?productName=${productName}`);
+        const res = await fetch(`${urlDev}/products/search?productName=${productName}`);
         const data = await res.json();
         return data;
     } catch (error) {
@@ -100,7 +88,7 @@ const getSearchProducts = async (productName) => {
  * Se debe enviar el id de la categoria
 */
 const getProductByCategory = async(id) => {
-    const res = await fetch(`${urlApi}/category/${id}`);
+    const res = await fetch(`${urlDev}/category/${id}`);
     const data = await res.json();
     if(res.status === 404){
         return data.message;
@@ -113,13 +101,15 @@ const renderCategories = async() => {
     categories.forEach(category => {
         const { id, name } = category;
         liTemplate.querySelector('.nav-link').textContent = name;
-        liTemplate.querySelector('.nav-link').dataset.id = id;
         const clone = liTemplate.cloneNode(true);
         fragmentLi.appendChild(clone);
     })
-    liContainerCategories.appendChild(fragmentLi)
 
-};
+    liContainer.appendChild(fragmentLi)
+
+}
+
+renderCategories();
 
 const renderCards = async (array) => {
     array.forEach(product => {
@@ -169,26 +159,9 @@ const errorNotFound = () => {
 }
 const showSpinner = () => {
     spinner.classList.remove('hidden-price')
+
 };
 
 const hiddenSpinner = () => {
     spinner.classList.add('hidden-price')
-};
-
-const generatorNumPages = async() => {
-    const { totalPages } = await getProducts()
-    return Array.from({ length: totalPages }, (x, i) => i+1);
 }
-
-const renderPagination = async() => {
-    const pages = await generatorNumPages();
-    pages.forEach( pageNumber => {
-        paginationTemplate.querySelector('a').textContent = pageNumber
-        paginationTemplate.querySelector('a').dataset.id = pageNumber
-        const clone = paginationTemplate.cloneNode(true);
-        fragment.appendChild(clone)
-    })
-    paginationContainer.appendChild(fragment)
-}
-
-renderPagination()

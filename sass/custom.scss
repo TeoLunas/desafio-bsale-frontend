@@ -1,0 +1,19 @@
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 960px,
+    xxl: 960px
+);
+
+@media (max-width: 960px) { 
+    .hidden-custom {
+        display: none;
+    }
+}
+
+.size{
+    background-color: red;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
