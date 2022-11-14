@@ -25,6 +25,17 @@ const startApp = async() => {
 }
 
 btnSearch.addEventListener('click', async(e)=> {
+    e.preventDefault()
+     //Validacion para que solo se acepten letras y espacios.
+    const expr = /([^\w\d])+/g;
+    let testInput = expr.test(searchProductInput.value);
+    if (testInput || searchProductInput.value === '') {
+        searchProductInput.classList.add('border-danger');
+        setTimeout(() => {
+            searchProductInput.classList.remove('border-danger');
+            return
+        }, 3000);
+    } 
     e.preventDefault();
     cleanHtml(cardContainer)
     try {
