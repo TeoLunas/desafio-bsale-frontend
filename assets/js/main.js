@@ -152,10 +152,9 @@ const renderCards = async (array) => {
             cardTemplate.querySelector('img').setAttribute('src', imgRes);
         }
         cardTemplate.querySelector('.card-title').textContent = name;
-        // cardTemplate.querySelector('.card-text').textContent = formatMoney(price);
-        // discount != 0 ? console.log({name, discount}) : console.log({name, discount})
-        // discount != 0 ? cardTemplate.querySelector('.card-text').textContent = formatMoney(price) : console.log({name, discount})
-        // cardTemplate.querySelector('.card-text').classList.add('hidden-price')
+        if(discount > 0){
+            cardTemplate.querySelector('.card-text').textContent = formatMoney(price);
+        }
         cardTemplate.querySelector('.fw-bold').textContent = formatMoney((price - amountDiscount));
         
         // cardTemplate.querySelector('').textContent = "";
