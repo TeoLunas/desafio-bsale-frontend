@@ -33,8 +33,8 @@ btnSearch.addEventListener('click', async(e)=> {
         searchProductInput.classList.add('border-danger');
         setTimeout(() => {
             searchProductInput.classList.remove('border-danger');
-            return
         }, 3000);
+        return;
     } 
     e.preventDefault();
     cleanHtml(cardContainer)
