@@ -18,16 +18,14 @@ p {
     display: none;
 }
 
+
 @media (max-width: 480px) {
-    body {
-        background: green;
+    .custom-direction{
+        flex-direction: column;
     }
 }
 
 @media(min-width: 1280px){
-    body {
-        background: red;
-    }
     .hidden-custom {
         display: block;
     }

@@ -25,9 +25,9 @@
         <main class="row border">
             <!-- Contenedor de barra de navegacion -->
             <header class="col-12">
-                <nav class="navbar navbar-expand-lg bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#"><span class="material-symbols-sharp">storefront</span></a>
+                        <a class="navbar-brand" href="./index.html"><span class="material-symbols-sharp">storefront</span></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -35,8 +35,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="li-container">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </ul>
                             <div class="d-flex align-items-cente">
                                 <span class="material-symbols-sharp">person</span>
@@ -50,39 +48,6 @@
             <!-- Contenedor de barra lateral y cards de productos -->
             <section class="col-12">
                 <div class="row">
-                    <!-- Inicio aside con categorias -->
-                    <aside class="col-sm-2 hidden-custom">
-                        <ul class="list-group row">
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Categorias
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center col-12">
-                                Cervezas
-                                <span class="badge bg-primary rounded-pill m-2">14</span>
-                            </li>
-                        </ul>
-                    </aside>
-                    <!-- Fin aside con categorias -->
                     <!-- Inicio Contenedor de cards con productos -->
                     <section class="col-12 col-sm-9">
                         <div class="row">
@@ -103,13 +68,28 @@
                                         </form>
                                     </div>
                                     <!-- Filtro -->
-                                    <div class="col-5 p-2 border">
+                                    <!-- <div class="col-5 p-2 border">
                                         <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected>Ordenar Por</option>
                                             <option value="1">Nombre A - Z</option>
                                             <option value="2">Precio Menor a Mayor</option>
                                             <option value="3">Precio Mayor a Menor</option>
                                         </select>
+                                    </div> -->
+                                    <div class="col-12">
+                                        <div class="container mt-4 w-50 hidden-price" id="notFoundContainer">
+                                            <div class="row border-light shadow p-3 mb-5 rounded text-center">
+                                                <div class="col-12  ">
+                                                    <p class="m-4">Lo Sentimos No encontramos lo que buscas</p>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <p class="m-2">Puedes volver al <a href="./index.html" class="link-info">Inicio</a></p>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <p class="m-2">Realizar una nueva busqueda.</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </header>
@@ -117,7 +97,7 @@
                             <section class="col-12">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h1>Productos</h1>
+                                        <h1>Todos Los Productos<span></span></h1>
                                     </div>
                                     <!-- Spinner de carga -->
                                     <div class="col-12" id="spinner">
@@ -137,16 +117,9 @@
                             </section>
                             <footer class="col-12 mt-4">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link">Previous</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
+                                    <ul class="pagination justify-content-center" id="pagination">
+                                        
+                                        
                                     </ul>
                                 </nav>
                             </footer>
@@ -157,10 +130,9 @@
             <!-- Contenedor de footer -->
             <footer class="col-12">
                 <div class="row">
-                    <div class="col-12 bg-success text-white d-flex justify-content-center p-5">
-                        <p><span class="material-symbols-sharp">mail</span> Suscríbete a nuestras ofertas y novedades
-                        </p>
-                        <form class="d-flex flex-row mx-3" role="search">
+                    <div class="col-12 bg-success text-white d-flex justify-content-center p-5 custom-direction">
+                        <p><span class="material-symbols-sharp">mail</span> Suscríbete a nuestras ofertas y novedades</p>
+                        <form class="d-flex flex-row mx-3 col-12" role="search">
                             <input class="form-control me-2" type="email" placeholder="Ingresa tu Correo Aqui"
                                 aria-label="email">
                             <button class="btn btn-dark" type="submit">SUSCRIBIRME</button>
@@ -168,8 +140,8 @@
                     </div>
                     <div class="col-12 col-md-3 col-lg-3">
                         <ul class="row list-group list-group-flush">
-                            <li class="col-12 list-group-item">
-                                Siguenos
+                            <li class="col-12 list-group-item fw-bold fs-4">
+                                Hablemos
                             </li>
                             <li class="col-3 list-group-item">
                                 <p><img src="https://img.icons8.com/fluency/48/null/instagram-new.png" /></p>
@@ -181,7 +153,7 @@
                     </div>
                     <div class="col-12 col-md-3 col-lg-3">
                         <ul class="row list-group list-group-flush">
-                            <li class="col-12 list-group-item">Medios De Pago</li>
+                            <li class="col-12 list-group-item fw-bold fs-4">Medios De Pago</li>
                             <li class="col-3 list-group-item"><img
                                     src="data:image/png;base64,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"
                                     alt="Webpay"></li>
@@ -218,8 +190,7 @@
                     <h5 class="card-title fs-6 text-center p-2">Producto Name</h5>
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <p class="card-text fs-6 fw-lighter text-decoration-line-through">Precio sin descuento
-                            </p>
+                            <p class="card-text fs-6 fw-lighter badge bg-danger"></p>
                             <p class="card-text fw-bold">Precio</p>
                         </div>
                         <p class="card-text d-flex align-items-center"><span class="material-symbols-sharp fs-1">add_shopping_cart</span>
@@ -230,26 +201,15 @@
         </article>
     </template>
 
-    <template id="template-notfound">
-        <div class="container w-50">
-            <div class="row border-light shadow p-3 mb-5 rounded text-center">
-                <div class="col-12  ">
-                    <p class="m-4">Lo Sentimos No encontramos lo que buscas</p>
-                </div>
-                <div class="col-6 ">
-                    <p class="m-2">Puedes volver al <a href="#" class="link-info">Inicio</a></p>
-                </div>
-                <div class="col-6 ">
-                    <p class="m-2">Realizar una nueva busqueda.</p>
-                </div>
-            </div>
-        </div>
-    </template>
 
     <template id="template-li">
         <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
         </li>
+    </template>
+
+    <template id="template-pagination">
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
     </template>
 
     
