@@ -1,5 +1,4 @@
-// const urlDev = 'http://localhost:4000/api/v1/';
-const urlDev = 'https://bsale-backend-api.herokuapp.com/api/v1/';
+const urlApi = 'https://bsale-backend-api.herokuapp.com/api/v1/';
 const cardContainer = document.getElementById('card-container');
 const liContainer = document.getElementById('li-container');
 const searchProductInput = document.getElementById('searchProduct');
@@ -51,7 +50,7 @@ const startApp = async() => {
  * Funcion para obtener todos los productos
  */
 const getProducts = async() => {
-    const res = await fetch(`${urlDev}/products`);
+    const res = await fetch(`${urlApi}/products`);
     const data = await res.json();
     return data;
 
@@ -61,7 +60,7 @@ const getProducts = async() => {
  * Funcion para obtener todas las categorias
  */
 const getCategories = async() => {
-    const res = await fetch(`${urlDev}/category`);
+    const res = await fetch(`${urlApi}/category`);
     const data = await res.json();
     if(res.status === 404){
         console.log(data)
@@ -75,7 +74,7 @@ const getCategories = async() => {
 */
 const searchProducts = async (productName) => {
     try {
-        const res = await fetch(`${urlDev}/products/search?productName=${productName}`);
+        const res = await fetch(`${urlApi}/products/search?productName=${productName}`);
         const data = await res.json();
         return data;
     } catch (error) {
@@ -88,7 +87,7 @@ const searchProducts = async (productName) => {
  * Se debe enviar el id de la categoria
 */
 const getProductByCategory = async(id) => {
-    const res = await fetch(`${urlDev}/category/${id}`);
+    const res = await fetch(`${urlApi}/category/${id}`);
     const data = await res.json();
     if(res.status === 404){
         return data.message;
