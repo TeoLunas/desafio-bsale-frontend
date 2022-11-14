@@ -18,10 +18,9 @@ p {
     display: none;
 }
 
+
 @media (max-width: 480px) {
-    body {
-        background: green;
-    }
+
 }
 
 @media(min-width: 1280px){
