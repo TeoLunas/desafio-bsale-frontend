@@ -147,14 +147,14 @@ const renderCards = async (array) => {
     array.forEach(product => {
         const { name, url_image, price, discount } = product;
         const amountDiscount = discount === 0 ? 0 : (discount * price) / 100;
+        // console.log(price, discount)
+        // console.log(price - amountDiscount)
         cardTemplate.querySelector('img').setAttribute('src', url_image);
         if(!url_image){
             cardTemplate.querySelector('img').setAttribute('src', imgRes);
         }
         cardTemplate.querySelector('.card-title').textContent = name;
-        if(discount > 0){
-            cardTemplate.querySelector('.card-text').textContent = formatMoney(price);
-        }
+        cardTemplate.querySelector('.card-text').textContent = `${discount}%`;
         cardTemplate.querySelector('.fw-bold').textContent = formatMoney((price - amountDiscount));
         
         // cardTemplate.querySelector('').textContent = "";
