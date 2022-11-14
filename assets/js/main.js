@@ -85,7 +85,10 @@ paginationContainer.addEventListener('click', async(e)=> {
  * Funcion para obtener todos los productos
  */
 const getProducts = async(pageNumber = 1) => {
-    const res = await fetch(`${urlApi}/products/?page=${pageNumber}`);
+    
+    // const res = await fetch(`${urlApi}/products/?page=${pageNumber}`);
+    const url = `${urlApi}/products/?pageNumber=` + new URLSearchParams({pageNumber}).toString();
+    const res = await fetch(url);
     const data = await res.json();
     return data;
 };
