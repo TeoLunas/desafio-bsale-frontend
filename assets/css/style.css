@@ -1,0 +1,34 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h5 {
+    font-weight: 700;
+}
+
+p {
+    font-weight: lighter;
+}
+
+.hidden-custom {
+    display: none;
+}
+
+.hidden-price {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    body {
+        background: green;
+    }
+}
+
+@media(min-width: 1280px){
+    body {
+        background: red;
+    }
+    .hidden-custom {
+        display: block;
+    }
+}
